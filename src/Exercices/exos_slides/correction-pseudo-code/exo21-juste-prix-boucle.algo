@@ -1,0 +1,22 @@
+// Exo 21 — « C'est plus, c'est moins » en boucle TANT QUE le juste prix n'est pas trouvé
+// L'ordinateur choisit un nombre entre 1 et 100 ; on affiche le nombre de tentatives
+
+DEBUT
+    juste_prix ← NombreAleatoire(1, 100)        // random.randrange(1, 101, 1) en Python
+    proposition ← 0                             // 0 est impossible → on entre forcément dans la boucle
+    tentatives ← 0
+
+    TANT QUE proposition ≠ juste_prix FAIRE
+        Afficher("Entrez un nombre entre 1 et 100 :")
+        Lire(proposition)
+        tentatives ← tentatives + 1
+
+        SI proposition < juste_prix ALORS
+            Afficher("C'est plus")
+        SINON SI proposition > juste_prix ALORS
+            Afficher("C'est moins")
+        FIN SI
+    FIN TANT QUE
+
+    Afficher("C'est gagné en ", tentatives, " tentatives !")
+FIN

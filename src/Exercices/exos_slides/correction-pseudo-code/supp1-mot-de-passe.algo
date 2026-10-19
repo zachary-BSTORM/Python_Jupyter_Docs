@@ -1,0 +1,27 @@
+// Supplémentaire 1 — Système de connexion par mot de passe
+// 3 erreurs de suite → compte bloqué, pas de 4e essai
+
+DEBUT
+    MOT_DE_PASSE ← "python123"
+    saisie ← ""
+    essais ← 0
+    connecte ← FAUX
+
+    TANT QUE essais < 3 ET connecte = FAUX FAIRE
+        Afficher("Entrez votre mot de passe :")
+        Lire(saisie)
+
+        SI saisie = MOT_DE_PASSE ALORS
+            connecte ← VRAI
+        SINON
+            essais ← essais + 1
+            Afficher("Mot de passe incorrect (", essais, "/3)")
+        FIN SI
+    FIN TANT QUE
+
+    SI connecte = VRAI ALORS
+        Afficher("Bonjour, content de vous revoir !")
+    SINON
+        Afficher("Votre compte est bloqué")
+    FIN SI
+FIN

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- {{ titre }} est un « trou » : Python fournit la valeur via le context -->
+    <title>{{ titre }} — Boutique</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+        nav { display: flex; gap: 1rem; padding-bottom: 1rem; border-bottom: 2px solid #eee; margin-bottom: 1.5rem; }
+        nav a { text-decoration: none; color: #0a6cbd; font-weight: 600; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid #eee; }
+        th { background: #f7f7f7; }
+        .stock-bas { color: #c0392b; font-weight: 600; }
+        footer { margin-top: 2rem; font-size: .8rem; color: #999; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Accueil</a>
+        <a href="/produits">Produits</a>
+        <a href="/docs">Documentation API</a>
+    </nav>
+
+    <h1>{{ titre }}</h1>
+
+    <!-- Chaque page « enfant » injecte son contenu ici -->
+    {% block contenu %}{% endblock %}
+
+    <footer>Démo formation — FastAPI + Jinja2</footer>
+</body>
+</html>

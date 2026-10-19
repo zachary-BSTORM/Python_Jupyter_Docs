@@ -1,0 +1,39 @@
+// Exo 30 — Insérer une valeur dans un tableau TRIÉ, à la bonne place
+// (interdit d'insérer à la fin puis de trier)
+//
+// ─── La démarche, étape par étape ───
+// 1. TROUVER OÙ : la bonne position est celle du premier élément
+//    SUPÉRIEUR OU ÉGAL à la valeur — tout ce qui est avant est plus petit.
+// 2. LA BOUCLE : position avance TANT QUE (a) position < Longueur(T)
+//    ET (b) T[position] < valeur. C'est exactement la double garde de
+//    l'exo 28 — (a) d'abord, pour ne jamais lire hors du tableau.
+// 3. INSÉRER à cette position : les éléments suivants sont décalés
+//    d'un cran vers la droite — c'est le travail d'Insérer (insert).
+// 4. LES CAS LIMITES se gèrent tout seuls :
+//    valeur plus petite que tout  → la boucle ne tourne pas → position 0 ;
+//    valeur plus grande que tout  → arrêt sur (a) → position = Longueur(T),
+//    c'est-à-dire l'insertion en fin de tableau.
+//
+// Trace : insérer 11 dans [2, 5, 9, 14, 20]
+//   2 < 11 → position 1 ; 5 < 11 → 2 ; 9 < 11 → 3 ; 14 ≥ 11 → stop
+//   Insérer(T, 3, 11) → [2, 5, 9, 11, 14, 20]
+
+DEBUT
+    T ← [2, 5, 9, 14, 20]           // trié dans l'ordre croissant
+    valeur ← 0
+    position ← 0
+
+    Afficher("Tableau : ", T)
+    Afficher("Valeur à insérer ?")
+    Lire(valeur)
+
+    // ÉTAPES 1-2 — avancer tant que les éléments sont plus petits
+    TANT QUE position < Longueur(T) ET T[position] < valeur FAIRE
+        position ← position + 1
+    FIN TANT QUE
+
+    // ÉTAPES 3-4 — insérer là, les suivants se décalent à droite
+    Insérer(T, position, valeur)
+
+    Afficher("Tableau après insertion : ", T)
+FIN

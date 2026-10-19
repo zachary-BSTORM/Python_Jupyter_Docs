@@ -1,0 +1,39 @@
+// Exo 28 — Rechercher une valeur et afficher sa POSITION
+// (recherche séquentielle « à indice » — comparer avec l'exo 31, version drapeau)
+//
+// ─── La démarche, étape par étape ───
+// 1. UN INDICE i part de 0 et avance tant que DEUX conditions tiennent :
+//    (a) i < Longueur(T)   → on n'est pas au bout ;
+//    (b) T[i] ≠ valeur     → on n'a pas encore trouvé.
+// 2. L'ORDRE DES CONDITIONS COMPTE : tester i < Longueur(T) AVANT T[i].
+//    Si on lisait T[i] d'abord, le tour où i atteint la fin lirait une
+//    case qui n'existe pas.
+// 3. EN SORTIE DE BOUCLE, un seul test dit pourquoi on s'est arrêté :
+//    i < Longueur(T)  → arrêt sur (b) : TROUVÉ, et i EST la position ;
+//    i = Longueur(T)  → arrêt sur (a) : tout parcouru, absent.
+//
+// Trace : chercher 8 dans [12, 5, 8, 20, 8, 3]
+//   i=0 (12≠8) → i=1 (5≠8) → i=2 (8=8 : stop) → position 2
+//   (la PREMIÈRE occurrence — le second 8 n'est jamais atteint)
+
+DEBUT
+    T ← [12, 5, 8, 20, 8, 3]
+    valeur ← 0
+    i ← 0
+
+    Afficher("Tableau : ", T)
+    Afficher("Quelle valeur cherchez-vous ?")
+    Lire(valeur)
+
+    // ÉTAPES 1-2 — avancer tant que pas au bout ET pas trouvé
+    TANT QUE i < Longueur(T) ET T[i] ≠ valeur FAIRE
+        i ← i + 1
+    FIN TANT QUE
+
+    // ÉTAPE 3 — analyser la raison de la sortie
+    SI i < Longueur(T) ALORS
+        Afficher(valeur, " se trouve en position ", i)   // les positions commencent à 0
+    SINON
+        Afficher(valeur, " n'est pas dans le tableau")
+    FIN SI
+FIN

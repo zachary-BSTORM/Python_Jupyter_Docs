@@ -1,0 +1,21 @@
+// Exo 16 — Plus ou Moins
+// L'algorithme reçoit deux nombres (opération Lire) : a et b
+//   b plus petit que a  → « C'est plus »
+//   b plus grand que a  → « C'est moins »
+//   a égal à b          → « C'est gagné »
+
+DEBUT
+    a ← 0
+    b ← 0
+
+    Lire(a)
+    Lire(b)
+
+    SI b < a ALORS
+        Afficher("C'est plus")
+    SINON SI b > a ALORS
+        Afficher("C'est moins")
+    SINON
+        Afficher("C'est gagné")
+    FIN SI
+FIN

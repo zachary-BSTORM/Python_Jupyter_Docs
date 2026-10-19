@@ -1,0 +1,18 @@
+// Exo 20 — Reprise de l'exo 19 : l'utilisateur entre aussi l'exposant
+
+DEBUT
+    n ← 0
+    exposant ← 0
+    resultat ← 1
+    compteur ← 0
+
+    Lire(n)
+    Lire(exposant)
+
+    TANT QUE compteur < exposant FAIRE
+        resultat ← resultat * n
+        compteur ← compteur + 1
+    FIN TANT QUE
+
+    Afficher(n, "^", exposant, " = ", resultat)
+FIN

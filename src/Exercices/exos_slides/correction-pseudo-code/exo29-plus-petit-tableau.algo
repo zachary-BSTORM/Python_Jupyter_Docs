@@ -1,0 +1,38 @@
+// Exo 29 — Le plus petit de 10 entiers, version TABLEAU
+// (on ne retient RIEN pendant la saisie — contrainte de l'énoncé)
+//
+// ─── La démarche, étape par étape ───
+// 1. PHASE 1 — LA SAISIE : remplir le tableau, et rien d'autre.
+//    Les deux phases sont volontairement séparées : c'est toute la
+//    différence avec la version « sans tableau » (supplémentaire 3).
+// 2. PHASE 2 — LA RECHERCHE : le minimum provisoire part du PREMIER
+//    élément du tableau, T[0].
+//    ⚠ Surtout pas de « plus_petit ← 0 » : si l'utilisateur ne tape
+//    que des nombres positifs, 0 resterait le « minimum »... alors
+//    qu'il n'est même pas dans le tableau !
+// 3. PARCOURIR : chaque valeur plus petite que le minimum provisoire
+//    prend sa place. À la fin du parcours, le provisoire est définitif.
+
+DEBUT
+    T ← []
+    plus_petit ← 0
+
+    // ÉTAPE 1 — la saisie : on se contente de remplir le tableau
+    POUR i DE 1 A 10 FAIRE
+        Afficher("Entier ", i, "/10 :")
+        Lire(valeur)
+        Ajouter(T, valeur)
+    FIN POUR
+
+    // ÉTAPE 2 — le premier élément est le minimum provisoire
+    plus_petit ← T[0]
+
+    // ÉTAPE 3 — chaque valeur plus petite prend la place
+    POUR CHAQUE valeur DANS T FAIRE
+        SI valeur < plus_petit ALORS
+            plus_petit ← valeur
+        FIN SI
+    FIN POUR
+
+    Afficher("Le plus petit est ", plus_petit)
+FIN

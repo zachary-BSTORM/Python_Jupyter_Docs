@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block contenu %}
+    <table>
+        <tr><th>ID</th><th>Nom</th><th>Prix</th><th>Stock</th></tr>
+        {# {% for %} : le template boucle sur la liste passée par Python #}
+        {% for p in produits %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.nom }}</td>
+            {# Les filtres Jinja2 transforment les valeurs : ici, 2 décimales #}
+            <td>{{ "%.2f"|format(p.prix) }} €</td>
+            {# Un if dans le template : mise en évidence des stocks bas #}
+            <td class="{{ 'stock-bas' if p.stock < 6 else '' }}">{{ p.stock }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

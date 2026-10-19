@@ -1,0 +1,22 @@
+// Supplémentaire 2 — Afficher autant de lignes d'étoiles que le nombre saisi
+// Exemple avec 5 :
+// *
+// **
+// ***
+// ****
+// *****
+
+DEBUT
+    nombre ← 0
+    ligne ← ""
+
+    Lire(nombre)
+
+    POUR i DE 1 A nombre FAIRE
+        ligne ← ""
+        POUR j DE 1 A i FAIRE                 // la ligne i contient i étoiles
+            ligne ← ligne + "*"
+        FIN POUR
+        Afficher(ligne)
+    FIN POUR
+FIN

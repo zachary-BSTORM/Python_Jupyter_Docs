@@ -1,0 +1,40 @@
+// Exo 31 — Rechercher une valeur entrée par l'utilisateur
+// (recherche séquentielle « à drapeau » — comparer avec l'exo 28, version indice)
+//
+// ─── La démarche, étape par étape ───
+// 1. LE DRAPEAU « trouve » part à FAUX : « pour l'instant, rien vu ».
+// 2. LE PARCOURS ne peut que le passer à VRAI — jamais le remettre
+//    à FAUX.
+//    ⚠ L'erreur classique : ajouter un SINON trouve ← FAUX dans la
+//    boucle. Résultat : seul le DERNIER élément compte, le drapeau
+//    est écrasé à chaque tour !
+// 3. APRÈS la boucle, le drapeau résume tout le parcours : un seul
+//    SI trouve suffit pour conclure.
+// 4. DIFFÉRENCE AVEC L'EXO 28 : ici on ne demande pas la position →
+//    pas besoin d'indice, le POUR CHAQUE suffit. Indice quand on veut
+//    « où », drapeau quand on veut juste « oui ou non ».
+
+DEBUT
+    T ← [7, 42, 13, 5, 28, 19]
+    valeur ← 0
+    trouve ← FAUX                   // ÉTAPE 1 — rien vu pour l'instant
+
+    Afficher("Tableau : ", T)
+    Afficher("Quelle valeur cherchez-vous ?")
+    Lire(valeur)
+
+    // ÉTAPE 2 — le parcours ne fait que LEVER le drapeau
+    POUR CHAQUE element DANS T FAIRE
+        SI element = valeur ALORS
+            trouve ← VRAI
+        FIN SI
+        // (surtout pas de SINON trouve ← FAUX ici !)
+    FIN POUR
+
+    // ÉTAPE 3 — le drapeau résume tout le parcours
+    SI trouve = VRAI ALORS
+        Afficher(valeur, " est bien dans le tableau")
+    SINON
+        Afficher(valeur, " n'est pas dans le tableau")
+    FIN SI
+FIN

@@ -1,0 +1,63 @@
+// Projet — Le juste prix complet
+//   - 10 essais maximum ; après, c'est perdu et l'ordinateur affiche le juste prix
+//   - 3 niveaux : facile (1-10), moyen (1-100), difficile (1-1000)
+//   - on rejoue tant que la personne le désire (niveau redemandé, nombre régénéré)
+//   - toute saisie est vérifiée : le programme ne plante jamais
+
+DEBUT
+    rejouer ← "y"
+
+    TANT QUE rejouer = "y" FAIRE
+        EffacerEcran()                                  // os.system("cls") en Python
+
+        // --- choix du niveau (revalidé tant qu'il est incorrect) ---
+        niveau ← ""
+        TANT QUE niveau ≠ "1" ET niveau ≠ "2" ET niveau ≠ "3" FAIRE
+            Afficher("Niveau : 1 facile (1-10) | 2 moyen (1-100) | 3 difficile (1-1000)")
+            Lire(niveau)
+        FIN TANT QUE
+
+        SI niveau = "1" ALORS
+            maximum ← 10
+        SINON SI niveau = "2" ALORS
+            maximum ← 100
+        SINON
+            maximum ← 1000
+        FIN SI
+
+        // --- la partie ---
+        juste_prix ← NombreAleatoire(1, maximum)        // random.randrange(1, maximum + 1, 1)
+        essais_restants ← 10
+        trouve ← FAUX
+
+        TANT QUE essais_restants > 0 ET trouve = FAUX FAIRE
+            Afficher("Votre proposition (1 à ", maximum, ") — ", essais_restants, " essais restants :")
+            Lire(saisie)
+
+            SI EstUnNombre(saisie) ALORS                // saisie.isdigit() en Python
+                proposition ← ConvertirEnEntier(saisie)
+                essais_restants ← essais_restants - 1
+
+                SI proposition < juste_prix ALORS
+                    Afficher("C'est plus")
+                SINON SI proposition > juste_prix ALORS
+                    Afficher("C'est moins")
+                SINON
+                    trouve ← VRAI
+                    Afficher("C'est gagné en ", 10 - essais_restants, " tentatives !")
+                FIN SI
+            SINON
+                Afficher("Ce n'est pas un nombre !")    // ne consomme pas d'essai
+            FIN SI
+        FIN TANT QUE
+
+        SI trouve = FAUX ALORS
+            Afficher("Perdu ! Le juste prix était ", juste_prix)
+        FIN SI
+
+        Afficher("Voulez-vous rejouer ? y - n")
+        Lire(rejouer)
+    FIN TANT QUE
+
+    Afficher("Merci d'avoir joué !")
+FIN

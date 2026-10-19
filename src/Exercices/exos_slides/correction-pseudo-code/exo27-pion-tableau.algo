@@ -1,0 +1,48 @@
+// Exo 27 — Déplacer un pion dans un tableau de 10 cases
+// Commandes : g (gauche), d (droite), q (quitter).
+//
+// ─── La démarche, étape par étape ───
+// 1. L'ÉTAT DU JEU tient dans UNE variable : position (0 à 9).
+//    Le tableau n'est qu'un AFFICHAGE de cet état.
+// 2. LA BOUCLE DE JEU : TANT QUE la commande n'est pas "q" →
+//    dessiner, lire la commande, modifier la position. Toujours ce trio.
+// 3. DESSINER : parcourir les cases 0 à 9 — [P] si i = position,
+//    [ ] sinon — et coller le tout dans une seule chaîne.
+// 4. DÉPLACER SOUS CONDITION : d → position + 1 SEULEMENT si < 9 ;
+//    g → position - 1 SEULEMENT si > 0. Sans ces gardes : sortie du
+//    tableau (et en Python, l'indice -1 ne plante même pas : le pion
+//    se téléporterait de l'autre côté !).
+// 5. EffacerEcran() à chaque tour → l'effet d'animation en console.
+
+DEBUT
+    position ← 0
+    commande ← ""
+
+    // ÉTAPE 2 — la boucle de jeu
+    TANT QUE commande ≠ "q" FAIRE
+        EffacerEcran()                          // ÉTAPE 5 : os.system("cls")
+
+        // ÉTAPE 3 — dessiner le tableau : [P] pour le pion, [ ] ailleurs
+        ligne ← ""
+        POUR i DE 0 A 9 FAIRE
+            SI i = position ALORS
+                ligne ← ligne + "[P]"
+            SINON
+                ligne ← ligne + "[ ]"
+            FIN SI
+        FIN POUR
+        Afficher(ligne)
+
+        Afficher("g = gauche | d = droite | q = quitter")
+        Lire(commande)
+
+        // ÉTAPE 4 — déplacer, en restant dans le tableau
+        SI commande = "d" ET position < 9 ALORS
+            position ← position + 1
+        SINON SI commande = "g" ET position > 0 ALORS
+            position ← position - 1
+        FIN SI
+    FIN TANT QUE
+
+    Afficher("Fin de partie")
+FIN

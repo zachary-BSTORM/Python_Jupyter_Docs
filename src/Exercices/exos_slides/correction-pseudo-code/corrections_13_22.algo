@@ -1,0 +1,407 @@
+// ════════════════════════════════════════════════════════════════
+//  CORRECTIONS PSEUDO-CODE — exercices boucles (exo 13 → projet)
+// ════════════════════════════════════════════════════════════════
+
+
+// ---------- Exo 13 — Table de multiplication ----------
+// On récupère la table à afficher ET le nombre d'éléments à afficher
+
+DEBUT
+    table ← 0
+    nb_elements ← 0
+
+    Lire(table)                         // ex : 2  → la table de 2
+    Lire(nb_elements)                   // ex : 10 → de « 2 x 1 » à « 2 x 10 »
+
+    POUR i DE 1 A nb_elements FAIRE
+        Afficher(table, " x ", i, " = ", table * i)
+    FIN POUR
+FIN
+
+
+// ---------- Exo 14 — Lanceur de balles ----------
+// Trois variables : stock_balles, pret, panier_vide
+// Afficher les balles restantes à chaque lancer + un message à l'arrêt
+
+DEBUT
+    stock_balles ← 0
+    pret ← FAUX
+    panier_vide ← FAUX
+
+    Lire(pret)                          // « Êtes-vous prêt ? »
+    Lire(stock_balles)                  // « Combien de balles dans la machine ? »
+
+    SI stock_balles = 0 ALORS           // panier déjà vide au départ
+        panier_vide ← VRAI
+    FIN SI
+
+    SI pret = VRAI ALORS
+        TANT QUE panier_vide = FAUX FAIRE
+            stock_balles ← stock_balles - 1
+            Afficher("Balle lancée ! Il reste ", stock_balles, " balle(s)")
+
+            SI stock_balles = 0 ALORS
+                panier_vide ← VRAI
+            FIN SI
+        FIN TANT QUE
+
+        Afficher("Panier vide : la machine s'arrête")
+    SINON
+        Afficher("Revenez quand vous serez prêt")
+    FIN SI
+FIN
+
+
+// ---------- Exo 15 — Tables de multiplication de 1 à 9 ----------
+// Deux boucles imbriquées : l'externe choisit la table, l'interne affiche ses lignes
+
+DEBUT
+    POUR table DE 1 A 9 FAIRE
+        Afficher("--- Table de ", table, " ---")
+        POUR i DE 1 A 10 FAIRE
+            Afficher(table, " x ", i, " = ", table * i)
+        FIN POUR
+    FIN POUR
+FIN
+
+
+// ---------- Jeu du plus ou moins (1 à 10) ----------
+// En Python : from random import randint ; result = randint(1, 10)
+
+DEBUT
+    result ← NombreAleatoire(1, 10)
+    proposition ← 0                     // 0 est impossible → on entre forcément dans la boucle
+    coups ← 0
+
+    TANT QUE proposition ≠ result FAIRE
+        Afficher("Entrez une valeur entre 1 et 10 :")
+        Lire(proposition)
+        coups ← coups + 1
+
+        SI proposition < result ALORS
+            Afficher("C'est plus")
+        SINON SI proposition > result ALORS
+            Afficher("C'est moins")
+        FIN SI
+    FIN TANT QUE
+
+    Afficher("Trouvé en ", coups, " coup(s) !")
+FIN
+
+
+// ---------- Exo 17 — Distributeur : une autre boisson ? ----------
+// TANT QUE le client désire une autre boisson
+
+DEBUT
+    stock_coca ← 5
+    stock_fanta ← 4
+    stock_eau ← 6
+    stock_cafe ← 8
+    choix ← 0
+    encore ← "y"
+
+    TANT QUE encore = "y" FAIRE
+        Afficher("coca : 1 | fanta : 2 | eau : 3 | café : 4")
+        Lire(choix)
+
+        SELON choix FAIRE
+            CAS 1 :
+                SI stock_coca > 0 ALORS
+                    Afficher("voici votre coca")
+                    stock_coca ← stock_coca - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            CAS 2 :
+                SI stock_fanta > 0 ALORS
+                    Afficher("voici votre fanta")
+                    stock_fanta ← stock_fanta - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            CAS 3 :
+                SI stock_eau > 0 ALORS
+                    Afficher("voici votre eau")
+                    stock_eau ← stock_eau - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            CAS 4 :
+                SI stock_cafe > 0 ALORS
+                    Afficher("voici votre café")
+                    stock_cafe ← stock_cafe - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            AUTREMENT :
+                Afficher("choix invalide")
+        FIN SELON
+
+        Afficher("Désirez-vous une autre boisson ? y - n")
+        Lire(encore)
+    FIN TANT QUE
+
+    Afficher("Merci, au revoir !")
+FIN
+
+
+// ---------- Exo 18 — Calculatrice : un autre calcul ? ----------
+// TANT QUE l'utilisateur désire refaire un calcul
+
+DEBUT
+    nb_1 ← 0
+    nb_2 ← 0
+    operateur ← ""
+    encore ← "y"
+
+    TANT QUE encore = "y" FAIRE
+        Lire(nb_1)                      // « Entrez la première valeur »
+        Lire(operateur)                 // « Entrez un opérateur : + - * / % »
+        Lire(nb_2)                      // « Entrez la deuxième valeur »
+
+        SELON operateur FAIRE
+            CAS "+" :
+                Afficher(nb_1, " + ", nb_2, " = ", nb_1 + nb_2)
+            CAS "-" :
+                Afficher(nb_1, " - ", nb_2, " = ", nb_1 - nb_2)
+            CAS "*" :
+                Afficher(nb_1, " * ", nb_2, " = ", nb_1 * nb_2)
+            CAS "/" :
+                SI nb_2 ≠ 0 ALORS
+                    Afficher(nb_1, " / ", nb_2, " = ", nb_1 / nb_2)
+                SINON
+                    Afficher("division par zéro impossible")
+                FIN SI
+            CAS "%" :
+                Afficher(nb_1, " % ", nb_2, " = ", nb_1 MOD nb_2)
+            AUTREMENT :
+                Afficher("opération invalide")
+        FIN SELON
+
+        Afficher("Voulez-vous faire un autre calcul ? y - n")
+        Lire(encore)
+    FIN TANT QUE
+FIN
+
+
+// ---------- Exo 19 — N^10 avec TANT QUE ----------
+// Multiplier 10 fois le résultat par N
+
+DEBUT
+    n ← 0
+    resultat ← 1
+    compteur ← 0
+
+    Lire(n)
+
+    TANT QUE compteur < 10 FAIRE
+        resultat ← resultat * n
+        compteur ← compteur + 1
+    FIN TANT QUE
+
+    Afficher(n, "^10 = ", resultat)
+FIN
+
+
+// ---------- Exo 20 — N^exposant ----------
+// Reprise de l'exo 19 : l'utilisateur entre aussi l'exposant
+
+DEBUT
+    n ← 0
+    exposant ← 0
+    resultat ← 1
+    compteur ← 0
+
+    Lire(n)
+    Lire(exposant)
+
+    TANT QUE compteur < exposant FAIRE
+        resultat ← resultat * n
+        compteur ← compteur + 1
+    FIN TANT QUE
+
+    Afficher(n, "^", exposant, " = ", resultat)
+FIN
+
+
+// ---------- Exo 21 — Juste prix (1 à 100) avec tentatives ----------
+// En Python : random.randrange(1, 101, 1)
+
+DEBUT
+    juste_prix ← NombreAleatoire(1, 100)
+    proposition ← 0
+    tentatives ← 0
+
+    TANT QUE proposition ≠ juste_prix FAIRE
+        Afficher("Entrez un nombre entre 1 et 100 :")
+        Lire(proposition)
+        tentatives ← tentatives + 1
+
+        SI proposition < juste_prix ALORS
+            Afficher("C'est plus")
+        SINON SI proposition > juste_prix ALORS
+            Afficher("C'est moins")
+        FIN SI
+    FIN TANT QUE
+
+    Afficher("C'est gagné en ", tentatives, " tentatives !")
+FIN
+
+
+// ---------- Supplémentaire 1 — Mot de passe ----------
+// 3 erreurs de suite → compte bloqué, pas de 4e essai
+
+DEBUT
+    MOT_DE_PASSE ← "python123"
+    saisie ← ""
+    essais ← 0
+    connecte ← FAUX
+
+    TANT QUE essais < 3 ET connecte = FAUX FAIRE
+        Afficher("Entrez votre mot de passe :")
+        Lire(saisie)
+
+        SI saisie = MOT_DE_PASSE ALORS
+            connecte ← VRAI
+        SINON
+            essais ← essais + 1
+            Afficher("Mot de passe incorrect (", essais, "/3)")
+        FIN SI
+    FIN TANT QUE
+
+    SI connecte = VRAI ALORS
+        Afficher("Bonjour, content de vous revoir !")
+    SINON
+        Afficher("Votre compte est bloqué")
+    FIN SI
+FIN
+
+
+// ---------- Supplémentaire 2 — Pyramide d'étoiles ----------
+// La ligne i contient i étoiles
+
+DEBUT
+    nombre ← 0
+    ligne ← ""
+
+    Lire(nombre)
+
+    POUR i DE 1 A nombre FAIRE
+        ligne ← ""
+        POUR j DE 1 A i FAIRE
+            ligne ← ligne + "*"
+        FIN POUR
+        Afficher(ligne)
+    FIN POUR
+FIN
+
+
+// ---------- Supplémentaire 3 — Le plus petit de 10 entiers ----------
+// Le premier devient le plus petit provisoire, chaque entier plus petit prend sa place
+
+DEBUT
+    nombre ← 0
+    plus_petit ← 0
+
+    Lire(nombre)                        // le premier des 10 entiers
+    plus_petit ← nombre
+
+    POUR i DE 2 A 10 FAIRE
+        Lire(nombre)
+        SI nombre < plus_petit ALORS
+            plus_petit ← nombre
+        FIN SI
+    FIN POUR
+
+    Afficher("Le plus petit est ", plus_petit)
+FIN
+
+
+// ---------- Supplémentaire 4 — Tirets et espaces ----------
+// nbTiret tirets puis nbEspace espaces, le tout nbRep fois
+// Exemple : nbRep = 2, nbTiret = 1, nbEspace = 3 → |-   -   |
+// (les barres | ne sont là que pour visualiser les espaces)
+
+DEBUT
+    nb_rep ← 0
+    nb_tiret ← 0
+    nb_espace ← 0
+    ligne ← ""
+
+    Lire(nb_rep)
+    Lire(nb_tiret)
+    Lire(nb_espace)
+
+    POUR r DE 1 A nb_rep FAIRE
+        POUR t DE 1 A nb_tiret FAIRE
+            ligne ← ligne + "-"
+        FIN POUR
+        POUR e DE 1 A nb_espace FAIRE
+            ligne ← ligne + " "
+        FIN POUR
+    FIN POUR
+
+    Afficher(ligne)
+FIN
+
+
+// ---------- Projet — Le juste prix complet ----------
+// 10 essais max, niveaux, rejouer, saisies vérifiées (ne plante jamais)
+
+DEBUT
+    rejouer ← "y"
+
+    TANT QUE rejouer = "y" FAIRE
+        EffacerEcran()                                  // os.system("cls") en Python
+
+        // --- choix du niveau (revalidé tant qu'il est incorrect) ---
+        niveau ← ""
+        TANT QUE niveau ≠ "1" ET niveau ≠ "2" ET niveau ≠ "3" FAIRE
+            Afficher("Niveau : 1 facile (1-10) | 2 moyen (1-100) | 3 difficile (1-1000)")
+            Lire(niveau)
+        FIN TANT QUE
+
+        SI niveau = "1" ALORS
+            maximum ← 10
+        SINON SI niveau = "2" ALORS
+            maximum ← 100
+        SINON
+            maximum ← 1000
+        FIN SI
+
+        // --- la partie ---
+        juste_prix ← NombreAleatoire(1, maximum)        // random.randrange(1, maximum + 1, 1)
+        essais_restants ← 10
+        trouve ← FAUX
+
+        TANT QUE essais_restants > 0 ET trouve = FAUX FAIRE
+            Afficher("Votre proposition (1 à ", maximum, ") — ", essais_restants, " essais restants :")
+            Lire(saisie)
+
+            SI EstUnNombre(saisie) ALORS                // saisie.isdigit() en Python
+                proposition ← ConvertirEnEntier(saisie)
+                essais_restants ← essais_restants - 1
+
+                SI proposition < juste_prix ALORS
+                    Afficher("C'est plus")
+                SINON SI proposition > juste_prix ALORS
+                    Afficher("C'est moins")
+                SINON
+                    trouve ← VRAI
+                    Afficher("C'est gagné en ", 10 - essais_restants, " tentatives !")
+                FIN SI
+            SINON
+                Afficher("Ce n'est pas un nombre !")    // ne consomme pas d'essai
+            FIN SI
+        FIN TANT QUE
+
+        SI trouve = FAUX ALORS
+            Afficher("Perdu ! Le juste prix était ", juste_prix)
+        FIN SI
+
+        Afficher("Voulez-vous rejouer ? y - n")
+        Lire(rejouer)
+    FIN TANT QUE
+
+    Afficher("Merci d'avoir joué !")
+FIN

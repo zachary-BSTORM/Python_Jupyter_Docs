@@ -1,0 +1,49 @@
+// Exo 26 — Fusionner deux tableaux NON triés dans un troisième, trié
+//
+// ─── La démarche, étape par étape ───
+// 1. CONTRAINTE : le tri doit se faire PENDANT la fusion — interdit de
+//    tout verser dans tab3 puis de trier.
+// 2. L'IDÉE : à chaque tour, retirer LE PLUS GRAND élément restant (tous
+//    tableaux confondus) et l'ajouter à tab3 → tab3 se construit en
+//    ordre DÉCROISSANT, mais toujours trié.
+// 3. QUATRE CAS à chaque tour : tab1 vide (→ forcément tab2), tab2 vide
+//    (→ forcément tab1), sinon comparer Maximum(tab1) et Maximum(tab2).
+// 4. FINIR : Inverser(tab3) — c'est l'indice tab.reverse() de l'énoncé.
+//    Retourner n'est PAS trier : le tri a bien eu lieu pendant la fusion.
+//
+// Trace (débuts) avec tab1 = [8, 3, 15, 1] et tab2 = [12, 5, 20, 3, 2] :
+//   plus grand = 20 (tab2) → tab3 = [20]
+//   plus grand = 15 (tab1) → tab3 = [20, 15]
+//   plus grand = 12 (tab2) → tab3 = [20, 15, 12]   ... etc.
+
+DEBUT
+    tab1 ← [8, 3, 15, 1]
+    tab2 ← [12, 5, 20, 3, 2]
+    tab3 ← []
+
+    TANT QUE Longueur(tab1) > 0 OU Longueur(tab2) > 0 FAIRE
+
+        // ÉTAPE 3 — chercher le plus grand élément restant (4 cas)
+        SI Longueur(tab1) = 0 ALORS                     // tab1 épuisé → forcément tab2
+            plus_grand ← Maximum(tab2)
+            Retirer(tab2, plus_grand)
+        SINON SI Longueur(tab2) = 0 ALORS               // tab2 épuisé → forcément tab1
+            plus_grand ← Maximum(tab1)
+            Retirer(tab1, plus_grand)
+        SINON SI Maximum(tab1) ≥ Maximum(tab2) ALORS    // les deux ont encore des éléments
+            plus_grand ← Maximum(tab1)
+            Retirer(tab1, plus_grand)
+        SINON
+            plus_grand ← Maximum(tab2)
+            Retirer(tab2, plus_grand)
+        FIN SI
+
+        // ÉTAPE 2 — tab3 grandit du plus grand au plus petit
+        Ajouter(tab3, plus_grand)
+    FIN TANT QUE
+
+    // ÉTAPE 4 — décroissant → croissant (tab.reverse())
+    Inverser(tab3)
+
+    Afficher(tab3)                      // [1, 2, 3, 3, 5, 8, 12, 15, 20]
+FIN

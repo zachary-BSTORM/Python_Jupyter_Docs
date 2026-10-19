@@ -1,0 +1,85 @@
+// ════════════════════════════════════════════════════════════════
+//  CORRECTION PSEUDO-CODE — Horaires et réunions (exercices 1 → 5)
+//  L'exercice 5 assemble les trois fonctions des exercices 1 à 3.
+// ════════════════════════════════════════════════════════════════
+
+
+// ---------- Exercice 1 — Trouver les plages libres ----------
+// Pré-condition : reunions triées et sans chevauchement.
+// Idée : un « curseur » avance de réunion en réunion ; chaque trou
+// entre le curseur et le début de la réunion suivante est une plage libre.
+
+FONCTION plages_libres(debut_travail, fin_travail, reunions)
+    libres ← []
+    curseur ← debut_travail                     // fin de la dernière occupation connue
+
+    POUR CHAQUE [debut, fin] DANS reunions FAIRE
+        SI debut > curseur ALORS                // un trou avant cette réunion
+            Ajouter(libres, [curseur, debut])
+        FIN SI
+        curseur ← fin
+    FIN POUR
+
+    SI curseur < fin_travail ALORS              // le trou final, jusqu'à la fin de journée
+        Ajouter(libres, [curseur, fin_travail])
+    FIN SI
+
+    RETOURNER libres
+FIN FONCTION
+
+
+// ---------- Exercice 2 — Fusionner les réunions ----------
+// Idée : trier par heure de début, puis parcourir : chaque réunion
+// soit prolonge la dernière plage retenue, soit en ouvre une nouvelle.
+
+FONCTION fusionner_reunions(reunions)
+    triees ← Trier(reunions)                    // tri par heure de début
+    fusionnees ← []
+
+    POUR CHAQUE [debut, fin] DANS triees FAIRE
+        SI fusionnees n'est pas vide ET debut ≤ fin de la dernière plage ALORS
+            // chevauche (ou touche : exigé à l'exercice 4) → on prolonge
+            fin de la dernière plage ← Maximum(fin de la dernière plage, fin)
+        SINON
+            Ajouter(fusionnees, [debut, fin])   // nouvelle plage indépendante
+        FIN SI
+    FIN POUR
+
+    RETOURNER fusionnees
+FIN FONCTION
+
+
+// ---------- Exercice 3 — Borner aux heures de travail ----------
+// Idée : ramener chaque début à Maximum(debut, debut_travail) et chaque
+// fin à Minimum(fin, fin_travail) ; si la réunion devient vide, l'écarter.
+
+FONCTION borner_reunions(debut_travail, fin_travail, reunions)
+    bornees ← []
+
+    POUR CHAQUE [debut, fin] DANS reunions FAIRE
+        nouveau_debut ← Maximum(debut, debut_travail)
+        nouvelle_fin ← Minimum(fin, fin_travail)
+
+        SI nouveau_debut < nouvelle_fin ALORS   // il reste quelque chose dans la journée
+            Ajouter(bornees, [nouveau_debut, nouvelle_fin])
+        FIN SI
+    FIN POUR
+
+    RETOURNER bornees
+FIN FONCTION
+
+
+// ---------- Exercices 4 et 5 — Le planning complet ----------
+// Le pipeline : borner (ex. 3) → trier + fusionner (ex. 2) → trous (ex. 1).
+// Les étapes 4 et 5 de l'énoncé sont déjà couvertes par plages_libres,
+// qui gère les bornes de la journée via son curseur.
+
+FONCTION heures_libres(debut_travail, fin_travail, reunions)
+    occupees ← borner_reunions(debut_travail, fin_travail, reunions)    // étape 1
+    occupees ← fusionner_reunions(occupees)                             // étapes 2 et 3
+    RETOURNER plages_libres(debut_travail, fin_travail, occupees)       // étapes 4 et 5
+FIN FONCTION
+
+// Remarque (difficulté supplémentaire de l'exercice 5) : la version
+// « sans fonction toute faite » remplace Trier(...) par un tri manuel
+// (insertion à la bonne position, comme l'exo 26) — le reste est identique.

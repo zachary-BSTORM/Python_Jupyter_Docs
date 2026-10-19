@@ -1,0 +1,53 @@
+// Exo 17 — Distributeur de boissons : redemander TANT QUE le client désire une autre boisson
+
+DEBUT
+    stock_coca ← 5
+    stock_fanta ← 4
+    stock_eau ← 6
+    stock_cafe ← 8
+    choix ← 0
+    encore ← "y"
+
+    TANT QUE encore = "y" FAIRE
+        Afficher("coca : 1 | fanta : 2 | eau : 3 | café : 4")
+        Lire(choix)
+
+        SELON choix FAIRE
+            CAS 1 :
+                SI stock_coca > 0 ALORS
+                    Afficher("voici votre coca")
+                    stock_coca ← stock_coca - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            CAS 2 :
+                SI stock_fanta > 0 ALORS
+                    Afficher("voici votre fanta")
+                    stock_fanta ← stock_fanta - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            CAS 3 :
+                SI stock_eau > 0 ALORS
+                    Afficher("voici votre eau")
+                    stock_eau ← stock_eau - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            CAS 4 :
+                SI stock_cafe > 0 ALORS
+                    Afficher("voici votre café")
+                    stock_cafe ← stock_cafe - 1
+                SINON
+                    Afficher("cette boisson n'est pas disponible")
+                FIN SI
+            AUTREMENT :
+                Afficher("choix invalide")
+        FIN SELON
+
+        Afficher("Désirez-vous une autre boisson ? y - n")
+        Lire(encore)
+    FIN TANT QUE
+
+    Afficher("Merci, au revoir !")
+FIN

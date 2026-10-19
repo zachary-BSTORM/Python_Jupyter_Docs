@@ -1,0 +1,12 @@
+{# Ce template HÉRITE de base.html : il réutilise le squelette (menu, style)
+   et ne définit que son propre contenu. #}
+{% extends "base.html" %}
+
+{% block contenu %}
+    <p>Cette petite application montre les deux visages d'une appli web Python :</p>
+    <ul>
+        <li>une <strong>API JSON</strong> pour les programmes → <a href="/api/produits">/api/produits</a></li>
+        <li>des <strong>pages HTML</strong> pour les humains → <a href="/produits">/produits</a></li>
+    </ul>
+    <p>Le catalogue contient actuellement <strong>{{ nb_produits }}</strong> produit(s).</p>
+{% endblock %}

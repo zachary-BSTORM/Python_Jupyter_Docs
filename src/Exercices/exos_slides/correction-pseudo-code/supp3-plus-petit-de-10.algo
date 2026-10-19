@@ -1,0 +1,20 @@
+// Supplémentaire 3 — Lire 10 entiers et afficher le plus petit
+// Idée : le premier entier devient le plus petit provisoire,
+// puis chaque nouvel entier plus petit prend sa place
+
+DEBUT
+    nombre ← 0
+    plus_petit ← 0
+
+    Lire(nombre)                        // le premier des 10 entiers
+    plus_petit ← nombre
+
+    POUR i DE 2 A 10 FAIRE
+        Lire(nombre)
+        SI nombre < plus_petit ALORS
+            plus_petit ← nombre
+        FIN SI
+    FIN POUR
+
+    Afficher("Le plus petit est ", plus_petit)
+FIN

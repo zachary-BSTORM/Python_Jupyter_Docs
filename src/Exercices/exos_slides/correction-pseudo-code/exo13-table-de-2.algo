@@ -1,0 +1,14 @@
+// Exo 13 — Afficher une table de multiplication à l'aide d'une boucle
+// On récupère la table à afficher ET le nombre d'éléments à afficher
+
+DEBUT
+    table ← 0
+    nb_elements ← 0
+
+    Lire(table)                         // ex : 2  → la table de 2
+    Lire(nb_elements)                   // ex : 10 → de « 2 x 1 » à « 2 x 10 »
+
+    POUR i DE 1 A nb_elements FAIRE
+        Afficher(table, " x ", i, " = ", table * i)
+    FIN POUR
+FIN

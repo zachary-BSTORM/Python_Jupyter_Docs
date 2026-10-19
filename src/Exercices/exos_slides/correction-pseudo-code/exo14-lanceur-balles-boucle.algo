@@ -1,0 +1,32 @@
+// Exo 14 — Lanceur de balles : lancer une balle TANT QUE le stock n'est pas vide
+// Trois variables : stock_balles, pret, panier_vide
+// À chaque balle lancée : afficher le nombre de balles restantes
+// À l'arrêt : afficher un message
+
+DEBUT
+    stock_balles ← 0
+    pret ← FAUX
+    panier_vide ← FAUX
+
+    Lire(pret)                          // « Êtes-vous prêt ? »
+    Lire(stock_balles)                  // « Combien de balles dans la machine ? »
+
+    SI stock_balles = 0 ALORS           // panier déjà vide au départ
+        panier_vide ← VRAI
+    FIN SI
+
+    SI pret = VRAI ALORS
+        TANT QUE panier_vide = FAUX FAIRE
+            stock_balles ← stock_balles - 1
+            Afficher("Balle lancée ! Il reste ", stock_balles, " balle(s)")
+
+            SI stock_balles = 0 ALORS
+                panier_vide ← VRAI
+            FIN SI
+        FIN TANT QUE
+
+        Afficher("Panier vide : la machine s'arrête")
+    SINON
+        Afficher("Revenez quand vous serez prêt")
+    FIN SI
+FIN

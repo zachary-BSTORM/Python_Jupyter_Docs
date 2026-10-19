@@ -1,0 +1,11 @@
+// Exo 15 — Afficher les tables de multiplication de 1 à 9 à l'aide de deux boucles
+// La boucle externe choisit la table, la boucle interne affiche ses lignes
+
+DEBUT
+    POUR table DE 1 A 9 FAIRE
+        Afficher("--- Table de ", table, " ---")
+        POUR i DE 1 A 10 FAIRE
+            Afficher(table, " x ", i, " = ", table * i)
+        FIN POUR
+    FIN POUR
+FIN

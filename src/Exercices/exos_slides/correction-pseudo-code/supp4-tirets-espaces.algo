@@ -1,0 +1,26 @@
+// Supplémentaire 4 — nbRep, nbTiret, nbEspace :
+// afficher nbTiret tirets suivis de nbEspace espaces, le tout nbRep fois
+// Exemple : nbRep = 2, nbTiret = 1, nbEspace = 3  →  |-   -   |
+// (les barres | ne sont là que pour visualiser les espaces en fin de ligne)
+
+DEBUT
+    nb_rep ← 0
+    nb_tiret ← 0
+    nb_espace ← 0
+    ligne ← ""
+
+    Lire(nb_rep)
+    Lire(nb_tiret)
+    Lire(nb_espace)
+
+    POUR r DE 1 A nb_rep FAIRE
+        POUR t DE 1 A nb_tiret FAIRE
+            ligne ← ligne + "-"
+        FIN POUR
+        POUR e DE 1 A nb_espace FAIRE
+            ligne ← ligne + " "
+        FIN POUR
+    FIN POUR
+
+    Afficher(ligne)
+FIN

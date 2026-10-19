@@ -1,0 +1,38 @@
+// Exo 23 — Moyenne des scores (max 10 joueurs)
+//
+// ─── La démarche, étape par étape ───
+// 1. VALIDER le nombre de joueurs AVANT tout le reste : on redemande
+//    tant que la valeur n'est pas entre 1 et 10 (boucle de validation).
+// 2. SAISIR : une boucle POUR remplit le tableau — à ce stade on stocke,
+//    on ne calcule rien.
+// 3. ADDITIONNER : un second parcours accumule les scores dans « total ».
+// 4. La MOYENNE = total / nb_joueurs — à la toute fin seulement.
+//
+// Exemple : 3 joueurs, scores 10, 20, 15 → total = 45 → moyenne = 15.
+
+DEBUT
+    nb_joueurs ← 0
+    scores ← []
+    total ← 0
+
+    // ÉTAPE 1 — validation : redemander tant que ce n'est pas entre 1 et 10
+    TANT QUE nb_joueurs < 1 OU nb_joueurs > 10 FAIRE
+        Afficher("Combien de joueurs ? (1 à 10)")
+        Lire(nb_joueurs)
+    FIN TANT QUE
+
+    // ÉTAPE 2 — saisie : on remplit le tableau, rien d'autre
+    POUR i DE 1 A nb_joueurs FAIRE
+        Afficher("Score du joueur ", i, " :")
+        Lire(score)
+        Ajouter(scores, score)
+    FIN POUR
+
+    // ÉTAPE 3 — accumulation : total reçoit chaque score l'un après l'autre
+    POUR CHAQUE score DANS scores FAIRE
+        total ← total + score
+    FIN POUR
+
+    // ÉTAPE 4 — la moyenne, une fois le total complet
+    Afficher("Moyenne des scores : ", total / nb_joueurs)
+FIN

@@ -1,0 +1,23 @@
+// Jeu du plus ou moins (1 à 10)
+// Nombre aléatoire, boucle de propositions, compteur de coups
+// En Python : from random import randint ; result = randint(1, 10)
+
+DEBUT
+    result ← NombreAleatoire(1, 10)
+    proposition ← 0                     // 0 est impossible → on entre forcément dans la boucle
+    coups ← 0
+
+    TANT QUE proposition ≠ result FAIRE
+        Afficher("Entrez une valeur entre 1 et 10 :")
+        Lire(proposition)
+        coups ← coups + 1
+
+        SI proposition < result ALORS
+            Afficher("C'est plus")
+        SINON SI proposition > result ALORS
+            Afficher("C'est moins")
+        FIN SI
+    FIN TANT QUE
+
+    Afficher("Trouvé en ", coups, " coup(s) !")
+FIN

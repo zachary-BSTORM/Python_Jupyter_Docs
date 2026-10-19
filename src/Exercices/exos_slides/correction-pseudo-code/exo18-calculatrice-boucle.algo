@@ -1,0 +1,36 @@
+// Exo 18 — Calculatrice : refaire un calcul TANT QUE l'utilisateur le désire
+
+DEBUT
+    nb_1 ← 0
+    nb_2 ← 0
+    operateur ← ""
+    encore ← "y"
+
+    TANT QUE encore = "y" FAIRE
+        Lire(nb_1)                      // « Entrez la première valeur »
+        Lire(operateur)                 // « Entrez un opérateur : + - * / % »
+        Lire(nb_2)                      // « Entrez la deuxième valeur »
+
+        SELON operateur FAIRE
+            CAS "+" :
+                Afficher(nb_1, " + ", nb_2, " = ", nb_1 + nb_2)
+            CAS "-" :
+                Afficher(nb_1, " - ", nb_2, " = ", nb_1 - nb_2)
+            CAS "*" :
+                Afficher(nb_1, " * ", nb_2, " = ", nb_1 * nb_2)
+            CAS "/" :
+                SI nb_2 ≠ 0 ALORS
+                    Afficher(nb_1, " / ", nb_2, " = ", nb_1 / nb_2)
+                SINON
+                    Afficher("division par zéro impossible")
+                FIN SI
+            CAS "%" :
+                Afficher(nb_1, " % ", nb_2, " = ", nb_1 MOD nb_2)
+            AUTREMENT :
+                Afficher("opération invalide")
+        FIN SELON
+
+        Afficher("Voulez-vous faire un autre calcul ? y - n")
+        Lire(encore)
+    FIN TANT QUE
+FIN

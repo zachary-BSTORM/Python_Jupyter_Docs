@@ -1,0 +1,41 @@
+// Exo 24 — Inverser un tableau (effet miroir)
+//
+// ─── La démarche, étape par étape ───
+// 1. SAISIR la taille, puis chaque élément dans le tableau.
+// 2. L'ÉCHANGE : le 1er élément va à la place du dernier et inversement.
+//    Pour échanger deux cases sans perdre de valeur, il faut une variable
+//    TEMPORAIRE (sinon la première affectation écrase l'une des deux).
+// 3. QUELS INDICES ? la case i s'échange avec la case « en face » :
+//    taille - 1 - i   (i=0 ↔ dernière, i=1 ↔ avant-dernière, ...)
+// 4. S'ARRÊTER AU MILIEU (taille DIV 2) : si on continuait jusqu'au bout,
+//    chaque paire serait échangée DEUX fois → on retrouverait le tableau
+//    de départ !
+//
+// Trace sur [1, 2, 3, 4, 5] (taille 5, milieu = 2 échanges) :
+//   i = 0 : 1 ↔ 5  →  [5, 2, 3, 4, 1]
+//   i = 1 : 2 ↔ 4  →  [5, 4, 3, 2, 1]
+//   stop — le 3 du milieu ne bouge pas.
+
+DEBUT
+    taille ← 0
+    T ← []
+
+    // ÉTAPE 1 — saisie du tableau
+    Afficher("Combien d'éléments ?")
+    Lire(taille)
+
+    POUR i DE 1 A taille FAIRE
+        Afficher("Élément ", i, " :")
+        Lire(valeur)
+        Ajouter(T, valeur)
+    FIN POUR
+
+    // ÉTAPES 2-3-4 — échanges deux à deux, jusqu'au milieu seulement
+    POUR i DE 0 A (taille DIV 2) - 1 FAIRE
+        temporaire ← T[i]               // ÉTAPE 2 : sauver avant d'écraser
+        T[i] ← T[taille - 1 - i]        // ÉTAPE 3 : l'élément « en face »
+        T[taille - 1 - i] ← temporaire
+    FIN POUR
+
+    Afficher("Tableau inversé : ", T)
+FIN

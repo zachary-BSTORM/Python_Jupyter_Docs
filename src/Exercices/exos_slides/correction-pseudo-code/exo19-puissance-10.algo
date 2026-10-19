@@ -1,0 +1,17 @@
+// Exo 19 — Calculer N^10 avec une boucle TANT QUE (N saisi par l'utilisateur)
+// Idée : multiplier 10 fois le résultat par N
+
+DEBUT
+    n ← 0
+    resultat ← 1
+    compteur ← 0
+
+    Lire(n)
+
+    TANT QUE compteur < 10 FAIRE
+        resultat ← resultat * n
+        compteur ← compteur + 1
+    FIN TANT QUE
+
+    Afficher(n, "^10 = ", resultat)
+FIN
