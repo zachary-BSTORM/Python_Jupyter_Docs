@@ -21,7 +21,7 @@
 # def divide(dividend : int, divisor : int)-> int:
 #         # 50 / 25 = 2
 #         v = divisor # 25
-#         count = 1 
+#         count = 1
 #         while v <= dividend:
 #             count += 1 # 2
 #             v += divisor # 50
@@ -31,8 +31,8 @@
 #                 return count
 #             else:
 #                 return count # 2
-                
-                
+
+
 # print(divide(75,3))
 
 # class Map:
@@ -56,16 +56,47 @@
 #             print("".join(row))
 
 
-
 # if __name__ == "__main__":
 #     game_map = Map()        # 10 lignes x 30 colonnes par défaut
 #     game_map.create_map()
 #     game_map.show_map()
 
+from collections import deque
+import timeit
 
-def fibo(n):
-    if n < 2:
-        return n
-    return fibo(n - 1) + fibo(n - 2)
 
-print(fibo(10))
+# --- Pile (LIFO) avec une liste ---
+stack = list(range(50000))
+
+def test_stack(stack):
+    return stack.pop()  # dépile le dernier
+
+temps = timeit.timeit(lambda: test_stack(stack), number=50_000)
+print(f"Pile  list.pop()      : {temps:.4f}s")
+
+
+def test_stack_first(stack):
+    return stack.pop(1)  # dépile le dernier
+temps = timeit.timeit(lambda: test_stack(stack), number=50_000)
+print(f"Pile  list.pop()      : {temps:.4f}s")
+
+
+
+# --- File (FIFO) avec une liste ---
+queue_list = list(range(50_000))
+
+def test_queue_list(queue):
+    return queue.pop(0)  # défile le premier, tout est décalé
+
+temps = timeit.timeit(lambda: test_queue_list(queue_list), number=50_000)
+print(f"File  list.pop(0)     : {temps:.4f}s")
+
+
+# --- File (FIFO) avec une deque ---
+queue = deque(range(50000))
+
+def test_queue(queue):
+    return queue.popleft()  # défile le premier, sans décalage
+
+temps = timeit.timeit(lambda: test_queue(queue), number=50_000)
+print(f"File  deque.popleft() : {temps:.4f}s")
